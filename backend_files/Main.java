@@ -1,7 +1,8 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         Event_Planner event_planner = new Event_Planner();
         event_planner.read_data("event_planner_data");

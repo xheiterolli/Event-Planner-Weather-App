@@ -17,6 +17,26 @@ public class Event {
         this.year = year;
     }
 
+    public String get_title() {
+        return title;
+    }
+
+    public String get_description() {
+        return description;
+    }
+
+    public int get_date() {
+        return date;
+    }
+
+    public int get_month() {
+        return month;
+    }
+
+    public int get_year() {
+        return year;
+    }
+
     @Override
     public String toString() {
         return title + "\n" + description + "\n" +

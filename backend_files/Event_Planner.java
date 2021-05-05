@@ -59,7 +59,7 @@ public class Event_Planner {
                         //txt2.delete();
                     } else {
                         pw.close();
-                        if(bu2.renameTo(new File(PATH + input_filename + ".bu.3"))){
+                        if (bu2.renameTo(new File(PATH + input_filename + ".bu.3"))) {
                             //System.out.println("renamed");
                         }
                     }
@@ -72,7 +72,7 @@ public class Event_Planner {
                     //txt2.delete();
                 } else {
                     pw.close();
-                    if(bu1.renameTo(new File(PATH + input_filename + ".bu.2"))){
+                    if (bu1.renameTo(new File(PATH + input_filename + ".bu.2"))) {
                         //System.out.println("renamed");
                     }
                 }
@@ -102,7 +102,28 @@ public class Event_Planner {
         }
     }
 
-    public void add_event() {
+    public void add_event(Scanner sc, String input_filename) throws IOException {
+        System.out.println("-------------------------------------------");
+        System.out.print("Enter Title of the Event: ");
+        String title = sc.nextLine();
+        System.out.println("Enter Description: ");
+        String description = sc.nextLine();
+        System.out.println("Enter Month: ");
+        int month = sc.nextInt();
+        System.out.println("Enter Date: ");
+        int date = sc.nextInt();
+        System.out.println("Enter Year: ");
+        int year = sc.nextInt();
+
+        Event temp_event = new Event(title, description, month, date, year);
+        event_list.add(temp_event);
+        System.out.println("Event successfully added to the planner.");
+
+        FileWriter fileWriter = new FileWriter(PATH + input_filename + ".txt", true);
+        pw = new PrintWriter(fileWriter);
+        pw.println(temp_event.get_title() + "," + temp_event.get_description() + "," +
+                temp_event.get_month() + "," + temp_event.get_date() + "," + temp_event.get_year());
+        pw.close();
 
     }
 
@@ -110,7 +131,7 @@ public class Event_Planner {
 
     }
 
-    public boolean menu() throws InterruptedException {
+    public boolean menu() throws InterruptedException, IOException {
         System.out.println("-------------------------------------------");
         System.out.println("Please pick one the options below:");
         System.out.println("1. Display Events");
@@ -128,7 +149,7 @@ public class Event_Planner {
                 display();
                 break;
             case "2":
-                add_event();
+                add_event(sc, "event_planner_data");
                 break;
             case "3":
                 remove_event();
