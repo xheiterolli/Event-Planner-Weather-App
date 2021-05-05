@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class Event_Planner {
 
     private static final String PATH = "..\\Event-Planner-Weather-App\\data_files\\";
-    private List<Event> event_list = new ArrayList<>();
+    private final List<Event> event_list = new ArrayList<>();
     private PrintWriter pw = null;
 
     public void read_data(String input_filename) {
@@ -21,8 +21,7 @@ public class Event_Planner {
                 tokens = line.split(",");
 
                 if ("event_planner_data".equals(input_filename)) {
-                    event_list.add(new Event(tokens[0], tokens[1], Integer.parseInt(tokens[2]),
-                            Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
+                    event_list.add(new Event(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -106,14 +105,14 @@ public class Event_Planner {
         System.out.println("-------------------------------------------");
         System.out.print("Enter Title of the Event: ");
         String title = sc.nextLine();
-        System.out.println("Enter Description: ");
+        System.out.print("Enter Description: ");
         String description = sc.nextLine();
-        System.out.println("Enter Month: ");
-        int month = sc.nextInt();
-        System.out.println("Enter Date: ");
-        int date = sc.nextInt();
-        System.out.println("Enter Year: ");
-        int year = sc.nextInt();
+        System.out.print("Enter Month (mm): ");
+        String month = sc.nextLine();
+        System.out.print("Enter Date (dd): ");
+        String date = sc.nextLine();
+        System.out.print("Enter Year (yyyy): ");
+        String year = sc.nextLine();
 
         Event temp_event = new Event(title, description, month, date, year);
         event_list.add(temp_event);
@@ -127,8 +126,23 @@ public class Event_Planner {
 
     }
 
-    public void remove_event() {
+    //TODO: Complete the Method
+    public void remove_event(Scanner sc, String input_filename) throws IOException {
+        System.out.println("-------------------------------------------");
+        System.out.print("Enter Title of the Event: ");
+        String title = sc.nextLine();
+        System.out.println("Enter the Full Date of the Event (mm/dd/yyyy): ");
+        String date = sc.nextLine();
 
+        for (Event event : event_list) {
+            String temp_date = event.get_month() + "/" + event.get_date()
+                    + "/" + event.get_year();
+            if (event.get_title().equals(title) && date.equals(temp_date)) {
+                event_list.remove(event);
+                System.out.println("Event successfully removed from the planner.");
+                break;
+            }
+        }
     }
 
     public boolean menu() throws InterruptedException, IOException {
@@ -152,7 +166,7 @@ public class Event_Planner {
                 add_event(sc, "event_planner_data");
                 break;
             case "3":
-                remove_event();
+                remove_event(sc, "event_planner_data");
                 break;
             case "0":
                 canContinue = false;

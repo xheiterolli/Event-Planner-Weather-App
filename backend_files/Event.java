@@ -1,15 +1,15 @@
 public class Event {
     private String title;
     private String description;
-    private int date;
-    private int month;
-    private int year;
+    private String date;
+    private String month;
+    private String year;
 
     public Event() {
 
     }
 
-    public Event(String title, String description, int month, int date, int year) {
+    public Event(String title, String description, String month, String date, String year) {
         this.title = title;
         this.description = description;
         this.month = month;
@@ -25,15 +25,15 @@ public class Event {
         return description;
     }
 
-    public int get_date() {
+    public String get_date() {
         return date;
     }
 
-    public int get_month() {
+    public String get_month() {
         return month;
     }
 
-    public int get_year() {
+    public String get_year() {
         return year;
     }
 
