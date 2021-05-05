@@ -10,11 +10,9 @@ public class Event_Planner {
 
     public void read_data(String input_filename) {
         File input_file = new File(PATH + input_filename + ".txt");
-        Scanner sc = null;
-        String[] tokens;
 
-        try {
-            sc = new Scanner(input_file);
+        String[] tokens;
+        try (Scanner sc = new Scanner(input_file)) {
             if (input_file.length() == 0) {
                 System.out.println(input_filename + " is empty.");
             }
@@ -22,31 +20,94 @@ public class Event_Planner {
                 String line = sc.nextLine();
                 tokens = line.split(",");
 
-                switch (input_filename) {
-                    case "event_planner_data":
-                        event_list.add(new Event(tokens[0], tokens[1], Integer.parseInt(tokens[2]),
-                                Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
-                        break;
+                if ("event_planner_data".equals(input_filename)) {
+                    event_list.add(new Event(tokens[0], tokens[1], Integer.parseInt(tokens[2]),
+                            Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
                 }
             }
         } catch (FileNotFoundException e) {
             System.err.println("File " + input_file + " was not found.");
-        } finally {
-            if (sc != null) {
-                sc.close();
+        }
+    }
+
+    public void backup_data(String input_filename) throws FileNotFoundException {
+        File txt = new File(PATH + input_filename + ".txt");
+        File bu1 = new File(PATH + input_filename + ".bu.1");
+        File bu2 = new File(PATH + input_filename + ".bu.2");
+        File bu3 = new File(PATH + input_filename + ".bu.3");
+
+        Scanner sc_backup = null;
+
+        if (txt.exists()) {
+            sc_backup = new Scanner(txt);
+            File txt2 = new File(PATH + input_filename + "2.txt");
+            pw = new PrintWriter(txt2);
+            while (sc_backup.hasNextLine()) {
+                String curr = sc_backup.nextLine();
+                pw.println(curr);
+            }
+
+            if (bu1.exists()) {
+                if (bu2.exists()) {
+                    if (bu3.exists()) {
+                        bu3.delete();
+                        pw.close();
+                        if (bu2.renameTo(new File(PATH + input_filename + ".bu.3"))) {
+                            //System.out.println("renamed");
+                        }
+                        txt2.renameTo(new File(PATH + input_filename + ".bu.1"));
+                        //txt2.delete();
+                    } else {
+                        pw.close();
+                        if(bu2.renameTo(new File(PATH + input_filename + ".bu.3"))){
+                            //System.out.println("renamed");
+                        }
+                    }
+                    //bu2.delete();
+                    pw.close();
+                    if (bu1.renameTo(new File(PATH + input_filename + ".bu.2"))) {
+                        //System.out.println("renamed");
+                    }
+                    txt2.renameTo(new File(PATH + input_filename + ".bu.1"));
+                    //txt2.delete();
+                } else {
+                    pw.close();
+                    if(bu1.renameTo(new File(PATH + input_filename + ".bu.2"))){
+                        //System.out.println("renamed");
+                    }
+                }
+                //txt2.delete();
+                pw.close();
+                if (txt2.renameTo(new File(PATH + input_filename + ".bu.1"))) {
+                    //System.out.println("renamed");
+                }
+                //txt2.delete();
+            } else {
+                pw.close();
+                if (txt2.renameTo(new File(PATH + input_filename + ".bu.1"))) {
+                    //System.out.println("renamed");
+                }
+                txt2.delete();
             }
         }
+        pw.close();
+        sc_backup.close();
+
     }
 
-    public void backup_data() {
-    }
-
-    public boolean display() {
+    public void display() {
         System.out.println("----------------- Events ------------------");
-        for (int i = 0; i < event_list.size(); i++) {
-            System.out.print(event_list.get(i).toString());
+        for (Event event : event_list) {
+            System.out.print(event.toString());
         }
-        return false;
+    }
+
+    public void add_event() {
+
+    }
+
+    public void remove_event() {
+
     }
 
     public boolean menu() throws InterruptedException {
@@ -65,6 +126,12 @@ public class Event_Planner {
         switch (choice) {
             case "1":
                 display();
+                break;
+            case "2":
+                add_event();
+                break;
+            case "3":
+                remove_event();
                 break;
             case "0":
                 canContinue = false;
