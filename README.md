@@ -1,4 +1,4 @@
-# Calendar
+# Event Planner & Weather App
 
 ## Members
 * Xhei Terolli
