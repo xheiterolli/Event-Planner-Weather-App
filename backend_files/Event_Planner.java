@@ -23,7 +23,7 @@ public class Event_Planner {
                 tokens = line.split(",");
 
                 switch (input_filename) {
-                    case "calendar_data":
+                    case "event_planner_data":
                         event_list.add(new Event(tokens[0], tokens[1], Integer.parseInt(tokens[2]),
                                 Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
                         break;
