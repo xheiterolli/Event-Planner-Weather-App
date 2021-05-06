@@ -126,13 +126,37 @@ public class Event_Planner {
 
     }
 
-    //TODO: Complete the Method
     public void remove_event(Scanner sc, String input_filename) throws IOException {
+        File txt = new File(PATH + input_filename + ".txt");
+        File temp_txt = new File(PATH + input_filename + "2.txt");
+
+        Scanner sc_txt = new Scanner(txt);
+        PrintWriter pw_txt = new PrintWriter(temp_txt);
+
         System.out.println("-------------------------------------------");
         System.out.print("Enter Title of the Event: ");
         String title = sc.nextLine();
         System.out.println("Enter the Full Date of the Event (mm/dd/yyyy): ");
         String date = sc.nextLine();
+
+        String[] tokens = date.split("/");
+        String new_date = tokens[0] + "," + tokens[1] + "," + tokens[2];
+
+        while (sc_txt.hasNextLine()) {
+            String curr = sc_txt.nextLine();
+            if (curr.contains(title) && curr.contains(new_date)) {
+                pw_txt.print("");
+                continue;
+            }
+            pw_txt.println(curr);
+        }
+
+        sc_txt.close();
+        pw_txt.close();
+        if (temp_txt.exists()) {
+            txt.delete();
+            temp_txt.renameTo(txt);
+        }
 
         for (Event event : event_list) {
             String temp_date = event.get_month() + "/" + event.get_date()
