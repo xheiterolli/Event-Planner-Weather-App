@@ -1,19 +1,19 @@
 package Client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import static java.lang.Character.toTitleCase;
 
-public class LinkedListProject {
+public class LinkedList {
 
     class Node{
         public int data;
         public Node next;
-        Node(int d) {
+        public Node(int d) {
             data = d;
             next = null;
         }
     }
-    
-    // Linked List to create the API calls 
     private Node head;
     private Node tail;
     private int temp;
@@ -25,8 +25,8 @@ public class LinkedListProject {
     private String city;
     private String country;
     private String description;
-    private ArrayList queue ;
-    private Node current;
+    private ArrayList<Node> queue ;
+//    private Node current;
 
     public LinkedList() {
         this.head = null;
@@ -39,11 +39,12 @@ public class LinkedListProject {
         this.cloudCover = 0;
         this.city = "City";
         this.country = "US";
-        this.description = "Clear Skies";
-        this.queue = new ArrayList();
+        this.description = "Bright and Clear";
+        this.queue = new ArrayList<>();
     }
 
-    public void append(int data) {
+    // adds node 
+    void append(int data) {
         Node new_node = new Node(data);
         if (this.head == null) {
             head = new Node(data);
@@ -56,5 +57,30 @@ public class LinkedListProject {
             current = current.next;
         current.next = new_node;
         return;
+    }
+
+   // adds info to the list
+    void addToList(){
+        Node current = head;
+        int weatherInfo =Integer.parseInt ("");
+        while (current == null) {
+            weatherInfo += current.data;
+            current = current.next;
+        }
+        append(Integer.parseInt(String.valueOf(weatherInfo)));
+    }
+
+    // searches for cities in the queue
+    public Serializable find(int key) {
+        System.out.println("\n");
+        for (int x = 0; x < queue.size(); x++) {
+                return x;
+            }
+        return ("" + key + " was not in the list. Please check if the city is in the list.");
+    }
+    void printList(){
+        for (int i = 0; i < queue.size(); i++) {
+            System.out.println(i);
+        }
     }
 }
