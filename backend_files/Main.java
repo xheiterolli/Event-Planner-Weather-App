@@ -31,6 +31,7 @@ public class Main {
                 can_continue = false;
             } else {
                 System.out.println("Please type in a valid choice.");
+                break;
             }
         } while (can_continue);
     }

@@ -30,7 +30,7 @@ public class Linked_List {
         list.tail.next = null;
     }
   //emarah charles
-    public static void insertSorted(Linked_List list, String data) {
+    public void insertSorted(Linked_List list, String data) {
 
         Node tnd = list.head;
         Node nnd = new Node(data);

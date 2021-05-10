@@ -1,4 +1,4 @@
-public static class Queue {
+public class Queue {
     Node head;
     Node tail;
 

@@ -40,12 +40,12 @@ public class Weather_Application {
                 String remove_input = sc.nextLine();
                 city_list.remove(city_list, remove_input);
                 break;
-                //emarah
-             case"5":
-                 System.out.println("Type the name of the city");
-                 String insert_input =sc.nextLine();
-                 city_list.insertSorted(city_list, insert_input);
-             break;
+            //emarah
+            case "5":
+                System.out.println("Type the name of the city");
+                String insert_input = sc.nextLine();
+                city_list.insertSorted(city_list, insert_input);
+                break;
             case "0":
                 canContinue = false;
                 System.out.print("Closing Weather Application");
