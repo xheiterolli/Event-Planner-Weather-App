@@ -29,6 +29,45 @@ public class Linked_List {
         }
         list.tail.next = null;
     }
+  //emarah charles
+    public static void insertSorted(Linked_List list, String data) {
+
+        Node tnd = list.head;
+        Node nnd = new Node(data);
+
+        boolean flag = true;
+
+        while (flag) {
+            if (nnd.data < tnd.data) {
+                if (tnd.prev == null) {
+                    tnd.prev = nnd;
+                    list.head = nnd;
+                    list.head.next = tnd;
+                    list.head.prev = null;
+                } else if (tnd.next == null) {
+                    nnd.next = list.tail;
+                    nnd.prev = list.tail.prev.prev;
+                    list.tail.prev.next = nnd;
+                    list.tail.prev = nnd;
+                } else {
+                    tnd.prev.next = nnd;
+                    tnd.prev = nnd;
+                    nnd.next = tnd;
+                    nnd.prev = tnd.prev.prev;
+                }
+                flag = false;
+            } else if (tnd.next == null) {
+                tnd.next = nnd;
+                list.tail = nnd;
+                list.tail.prev = tnd;
+                list.tail.next = null;
+                flag = false;
+            } else {
+                tnd = tnd.next;
+            }
+        }
+
+    }
 
     public void remove(Linked_List list, String data) {
 
