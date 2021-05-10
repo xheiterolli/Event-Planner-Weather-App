@@ -57,13 +57,14 @@ public class Weather_API {
 		Calendar c = Calendar.getInstance();
 		try {
 			int a = 1;
+			// Pulls from specific API Key
 			json = readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city_name + "&mode=json&units=metric&cnt=7&appid=9e305a41be9379cb679ece450324f811");
 
 			json_list = json.getJSONArray("list");
 			json_city = json.getJSONObject("city");
 			json_city_name = json_city.getString("name");
 
-			System.out.println("\n" + "The Forecast for " + json_city_name
+			System.out.println("\n" + "The Weather Forecast for " + json_city_name
 					+ " is: " + "\n");
 			for (int j = 0; j < 7; j++) {
 				Double result_temp2 = null;
@@ -90,7 +91,7 @@ public class Weather_API {
 			System.out.println();
 			GetCurrentTime();
 			
-			// "temp":{"min":-2.78,"eve":-2.78,"max":-1.4,"morn":-2.78,"night":-1.4,"day":-2.78}}
+			// exception for limit of pulls reached (100 per day)
 		} catch (Exception e) {
 			System.out.println("Overload 429");
 		}
