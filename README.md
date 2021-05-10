@@ -1,6 +1,6 @@
 # Event Planner & Weather App
 
-## Members
+## Members:
 * Xhei Terolli
 * Mohammed Alam
 * Emarah Charles
