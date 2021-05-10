@@ -13,7 +13,7 @@ public class Weather_Application {
         System.out.println("2. Find City Weather");
         System.out.println("3. Add City");
         System.out.println("4. Remove City");
-        System.out.println("5. Insert City sorted");
+        System.out.println("5. Insert City Sorted");
         System.out.println("0. Exit");
         System.out.println("-------------------------------------------");
 
@@ -42,9 +42,9 @@ public class Weather_Application {
                 break;
             //emarah
             case "5":
-                System.out.println("Type the name of the city");
+                System.out.print("Type the name of the city: ");
                 String insert_input = sc.nextLine();
-                city_list.insertSorted(city_list, insert_input);
+                city_list.insert_sorted(city_list, insert_input);
                 break;
             case "0":
                 canContinue = false;

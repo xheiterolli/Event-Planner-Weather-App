@@ -28,9 +28,11 @@ public class Linked_List {
             list.tail = new_node;
         }
         list.tail.next = null;
+        System.out.println("City added.");
     }
-  //emarah charles
-    public void insertSorted(Linked_List list, String data) {
+
+    //emarah charles
+    public void insert_sorted(Linked_List list, String data) {
 
         Node tnd = list.head;
         Node nnd = new Node(data);
@@ -38,7 +40,7 @@ public class Linked_List {
         boolean flag = true;
 
         while (flag) {
-            if (nnd.data < tnd.data) {
+            if (nnd.city_name.compareTo(tnd.city_name) < 0) {
                 if (tnd.prev == null) {
                     tnd.prev = nnd;
                     list.head = nnd;
@@ -66,7 +68,7 @@ public class Linked_List {
                 tnd = tnd.next;
             }
         }
-
+        System.out.println("City added.");
     }
 
     public void remove(Linked_List list, String data) {
