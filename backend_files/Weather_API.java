@@ -9,12 +9,11 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class sw {
+public class Weather_API {
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -42,27 +41,23 @@ public class sw {
 
 	// todo: url exception handing
 
-	public static void main(String[] args) throws IOException, JSONException {
+	public void api_call(String city_name) throws IOException, JSONException {
 
-		JSONObject json = null;
-		JSONObject json_specific = null; // get specific data in jsonobject
-											// variable
-		Double result_temp = null; // get integer/double of temperature variable
-
-		JSONArray json_list = null; // get array list of jsonarray variable
-		JSONObject json_specific_day = null; // pick specific day variable out
-												// of list
-		JSONArray json_weather = null;
-		JSONObject json_weather_specific = null;
-
-		JSONObject json_city = null;
-		String json_city_name = null;
+        JSONObject json;
+        JSONObject json_specific;
+        Double result_temp;
+        JSONArray json_list;
+        JSONObject json_specific_day;
+        JSONArray json_weather;
+        JSONObject json_weather_specific;
+        JSONObject json_city;
+        String json_city_name;
 
 		SimpleDateFormat df1 = new SimpleDateFormat("EEE", Locale.ENGLISH);
 		Calendar c = Calendar.getInstance();
 		try {
 			int a = 1;
-			json = readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast/daily?q="+user_input+"&mode=json&units=metric&cnt=7&appid=9e305a41be9379cb679ece450324f811");
+			json = readJsonFromUrl("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city_name + "&mode=json&units=metric&cnt=7&appid=9e305a41be9379cb679ece450324f811");
 
 			json_list = json.getJSONArray("list");
 			json_city = json.getJSONObject("city");
@@ -86,11 +81,10 @@ public class sw {
 				if (j > 0) {
 					c.add(Calendar.DATE, a);
 				}
-				String output = df1.format(c.getTime());
-
-				System.out.println(output + ". it's " + result_temp
-						+ " and at Night it's " + result_temp2 + " with "
-						+ description);
+                String output = df1.format(c.getTime());
+                System.out.println(output + ". It is " + result_temp
+                        + "°C, and at Night it is " + result_temp2 + "°C with "
+                        + description + ".");
 
 			}
 			System.out.println();
@@ -100,8 +94,8 @@ public class sw {
 		} catch (Exception e) {
 			System.out.println("Overload 429");
 		}
-
 	}
+	
 	public static void GetCurrentTime(){
 		java.util.Date date = new java.util.Date();
 		System.out.println(new Timestamp(date.getTime()));

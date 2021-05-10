@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Linked_List {
     Node head;
     Node tail;
@@ -102,11 +104,12 @@ public class Linked_List {
         }
     }
 
-    public void contains(Linked_List list, String data) {
+    public void contains(Linked_List list, String data) throws IOException {
+        Weather_API caller = new Weather_API();
         boolean flag = true;
 
         if (list.head == null) {
-            System.out.print("The list is empty.");
+            System.out.println("The list is empty.");
             flag = false;
         }
 
@@ -114,10 +117,10 @@ public class Linked_List {
 
         while (flag) {
             if (curr_node.city_name.equals(data)) {
-                System.out.println("Yes");
+                caller.api_call(curr_node.city_name);
                 break;
             } else if (curr_node == list.tail) {
-                System.out.println("No");
+                System.out.println("The city is not in the list.");
                 break;
             }
             curr_node = curr_node.next;
