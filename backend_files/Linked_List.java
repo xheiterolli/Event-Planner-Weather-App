@@ -139,7 +139,7 @@ public class Linked_List {
         while (flag) {
             Node curr_node = list.head;
 
-            System.out.print("Linked List: ");
+            System.out.print("City List: ");
 
             do {
                 System.out.print(curr_node.city_name + " ");
