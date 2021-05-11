@@ -4,9 +4,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Event_Planner {
 
-    //..\\Event-Planner-Weather-App\\backend_files\\
-    private static final String PATH = "C:\\Users\\Terolli\\Desktop\\data\\";
+    private static final String PATH = "..\\Event-Planner-Weather-App\\backend_files\\";
     private final List<Event> event_list = new ArrayList<>();
+    private final Queue queue = new Queue();
     private PrintWriter pw = null;
 
     public void read_data(String input_filename) {
@@ -96,14 +96,14 @@ public class Event_Planner {
     }
 
     public void display() {
-        System.out.println("----------------- Events ------------------");
+        System.out.println("----------------- Events -------------------");
         for (Event event : event_list) {
             System.out.print(event.toString());
         }
     }
 
     public void add_event(Scanner sc, String input_filename) throws IOException {
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.print("Enter Title of the Event: ");
         String title = sc.nextLine();
         System.out.print("Enter Description: ");
@@ -124,7 +124,6 @@ public class Event_Planner {
         pw.println(temp_event.get_title() + "," + temp_event.get_description() + "," +
                 temp_event.get_month() + "," + temp_event.get_date() + "," + temp_event.get_year());
         pw.close();
-
     }
 
     public void remove_event(Scanner sc, String input_filename) throws IOException {
@@ -134,7 +133,7 @@ public class Event_Planner {
         Scanner sc_txt = new Scanner(txt);
         PrintWriter pw_txt = new PrintWriter(temp_txt);
 
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.print("Enter Title of the Event: ");
         String title = sc.nextLine();
         System.out.println("Enter the Full Date of the Event (mm/dd/yyyy): ");
@@ -170,14 +169,23 @@ public class Event_Planner {
         }
     }
 
+    public static void print_titles_in_order(List<Event> event_list, Queue queue) {
+        for (Event temp_event : event_list) {
+            String title = temp_event.get_title();
+            queue.enqueue(title);
+        }
+        queue.display_queue();
+    }
+
     public boolean menu() throws InterruptedException, IOException {
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Please pick one the options below:");
         System.out.println("1. Display Events");
         System.out.println("2. Add Event");
         System.out.println("3. Remove Event");
+        System.out.println("4. Display Event Titles in Order of Addition");
         System.out.println("0. Exit");
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
 
         Scanner sc = new Scanner(System.in);
         String choice = sc.nextLine();
@@ -192,6 +200,9 @@ public class Event_Planner {
                 break;
             case "3":
                 remove_event(sc, "event_planner_data");
+                break;
+            case "4":
+                print_titles_in_order(event_list, queue);
                 break;
             case "0":
                 canContinue = false;

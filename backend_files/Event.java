@@ -40,6 +40,6 @@ public class Event {
     @Override
     public String toString() {
         return title + "\n" + description + "\n" +
-                "Date: " + month + "/" + date + "/" + year + "\n-------------------------------------------\n";
+                "Date: " + month + "/" + date + "/" + year + "\n--------------------------------------------\n";
     }
 }

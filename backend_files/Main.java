@@ -14,12 +14,12 @@ public class Main {
         boolean can_continue = true;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
         System.out.println("Which program would you like to use?");
         System.out.println("1. Event Planner");
         System.out.println("2. Weather Application");
         System.out.println("0. Exit");
-        System.out.println("-------------------------------------------");
+        System.out.println("--------------------------------------------");
         String input = sc.nextLine();
 
         do {

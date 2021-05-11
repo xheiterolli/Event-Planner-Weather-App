@@ -3,11 +3,11 @@ public class Queue {
     Node tail;
 
     public static class Node{
-        int data;
+        String data;
         Node next;
 
         // constructor
-        public Node(int data){
+        public Node(String data){
             this.data= data;
             this.next = null;
         }
@@ -19,7 +19,7 @@ public class Queue {
     }
 
     // checks the head value of the head
-    public int look(){
+    public String look(){
         if(is_empty()){
             System.out.println("The queue is empty.");
         }
@@ -27,7 +27,7 @@ public class Queue {
     }
 
     // pushes new values into the queue
-    public void enqueue(int data){
+    public void enqueue(String data){
         Node newNode = new Node(data);
 
         if(head == null){
@@ -45,42 +45,26 @@ public class Queue {
     public void display_queue(){
         Node current = head;
 
-        System.out.print("Queue list : ");
+        System.out.print("Title List: ");
 
         while(current != null){
-            System.out.print(current.data + " ");
+            System.out.print(current.data + ", ");
+
+            if (current == tail) {
+                System.out.println("\b\b");
+            }
 
             current = current.next;
         }
     }
 
     // removes the first value from the queue
-    public int dequeue(){
+    public String dequeue(){
         if(is_empty()){
             System.out.println("The queue is empty.");
         }
-        int result = head.data;
+        String result = head.data;
         head = head.next;
         return result;
-    }
-
-    public static void main(String [] args){
-        Queue queue = new Queue();
-
-        queue.enqueue(10);
-        queue.enqueue(159);
-        queue.enqueue(23);
-        queue.enqueue(121);
-        queue.enqueue(77);
-        queue.enqueue(8);
-        queue.enqueue(19);
-        queue.enqueue(6);
-
-        queue.display_queue();
-        System.out.print("\n" + "The queue is empty : " + queue.is_empty());
-        System.out.print("\n" + "The top data : " + queue.look());
-        System.out.print("\n" + "The remove data : " + queue.dequeue());
-        System.out.println();
-        queue.display_queue();
     }
 }
